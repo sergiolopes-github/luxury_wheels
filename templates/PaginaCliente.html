@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano Gold </title>
+
+    <style>
+        .cabecalho {
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .cabecalho-titulo{
+            text-align: center;
+        }
+
+        .navegador {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1em;
+            margin-top:-40px;
+        }
+
+        .nome-utulizador{
+            text-align: left;
+            font-size: 25px;
+            font-style: italic;
+            color: white;
+            font-weight: bold;
+            text-transform: capitalize;
+            padding: 10px;
+        }
+
+        .botao-navegador {
+            padding: 0.5em 1em;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            width: 120px;
+            height: 40px;
+            font-size: 15px;
+        }
+
+        .botao-navegador:hover {
+            background-color: rgb(0, 123, 255);
+            border-radius: 8px;
+            margin: 10 10px;
+        }
+
+        h1{
+            color: {{cor_h1}};
+        }
+
+        .barra-pesquisa {
+            align-items: center;
+            background-color: #c0c0c0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 1px;
+            margin-top: 1px;
+            font-family: Arial, Helvetica, sans-serif;
+            border: 2px solid #333;
+        }
+
+        .label-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        .label-pesquisa {
+            margin-bottom: 20px;
+            align-items: center;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        label{
+        margin-left: 20px;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button-pesquisar {
+            background-color: #808080;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 200px;
+            display: block;
+            margin: auto;
+        }
+
+        .button-pesquisar:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 25vh;
+            padding-bottom: 20px;
+            background-image: {{cor_card}};
+            border: 2px solid #333;
+            border-radius: 5px;
+            margin-bottom: 1px;
+        }
+
+        .titulo {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .conteudo-imagem {
+            display: flex;
+            align-items: center;
+        }
+
+        .conteudo {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .conteudo span {
+            font-size: 22px;
+            font-weight: bold;
+            display: block;
+        }
+
+        img {
+            margin-right: 20px;
+            border-radius: 15px;
+        }
+
+        .preco span{
+            font-size: 22px;
+            font-weight: bold;
+            display: block;
+        }
+        .preco {
+            margin-left: 50px;
+            margin-bottom: 50px;
+            padding: 15px;
+            border: 1px solid #333;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .preco button {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .preco button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .footer {
+            display: flex;
+            text-align: center;
+            margin-top: 1px;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .footer-section {
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .footer-section a {
+            color: #fff;
+        }
+
+        .condicao {
+            text-align: center;
+            color: red;
+            font-size: 23px;
+        }
+
+    </style>
+
+</head>
+<body>
+<header class="cabecalho">
+    <h1 class="cabecalho-titulo">Luxury Wheels</h1>
+    <h2 class="cabecalho-titulo">Transformando Viagens em Aventuras Inesquecíveis</h2>
+    <div class="conteiner-navegador">
+        <span class="nome-utulizador"> Utilizador: {{ dados_utilizador[0] }} {{ dados_utilizador[1] }} </span>
+        <div class="navegador">
+            <form action="/ver-frota" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <button type="submit" class="botao-navegador">Ver Frota</button>
+            </form>
+            <form action="/reservas" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Reservas</button>
+            </form>
+            <form action="/area-cliente" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Área Cliente</button>
+            </form>
+            <form action="/sobre" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Sobre</button>
+            </form>
+            <form action="/">
+                <button type="submit" class="botao-navegador">Log Out</button>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="barra-pesquisa">
+    <form action="/pesquisar-veiculos" method="post">
+        <div class="label-container">
+            <div class="label-pesquisa">
+                <label for="marca_veiculo">Marca do Veículo:</label>
+                <select id="marca_veiculo" name="marca_veiculo">
+                    <option value="">Todos</option>
+                    {% for row in veiculos_opcoes_pesquisa %}
+                    <option value="{{ row[1] }}">{{ row[1] }}</option>
+                    {% endfor %}
+                </select>
+                <label for="modelo_veiculo">Modelo do Veículo:</label>
+                <select id="modelo_veiculo" name="modelo_veiculo">
+                    <option value="">Todos</option>
+                    {% for row in veiculos_opcoes_pesquisa %}
+                    <option value="{{ row[2] }}">{{ row[2] }}</option>
+                    {% endfor %}
+                </select>
+                <label for="categoria">Tipo de Categoria:</label>
+                <select id="categoria" name="categoria">
+                    <option value="">Todos</option>
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Grande">Grande</option>
+                    <option value="Suv">Suv</option>
+                    <option value="Luxo">Luxo</option>
+                </select>
+                <label for="tipo_transmissao">Tipo de Transmissão:</label>
+                <select id="tipo_transmissao" name="tipo_transmissao">
+                    <option value="">Todos</option>
+                    <option value="Automática">Automática</option>
+                    <option value="Manual">Manual</option>
+                </select>
+            </div>
+        </div>
+        <div class="label-container">
+            <div class="label-pesquisa">
+                <label for="capacidade_passageiros">Capacidade de Passageiros:</label>
+                <select id="capacidade_passageiros" name="capacidade_passageiros">
+                    <option value="">Todos</option>
+                    <option value="1-4">1-4</option>
+                    <option value="5-6">5-6</option>
+                    <option value="7-20">Mais de 7</option>
+                </select>
+                <label for="preco_dia">Preço por Dia:</label>
+                <select id="preco_dia" name="preco_dia">
+                    <option value="">Todos</option>
+                    <option value="0-50">de 0€ até 50€</option>
+                    <option value="51-100">de 51€ até 100€</option>
+                    <option value="101-200">de 101€ até 200€</option>
+                    <option value="201-500">de 201€ até 500€</option>
+                    <option value="501-100000">Mais de 501€</option>
+                </select>
+                <label for="tipo_veiculo">Tipo de Veículo:</label>
+                <select id="tipo_veiculo" name="tipo_veiculo">
+                    <option value="">Todos</option>
+                    <option value="Carro">Carro</option>
+                    <option value="Mota">Mota</option>
+                </select>
+                <label for="tipo_combustivel">Tipo de Combustível:</label>
+                <select id="tipo_combustivel" name="tipo_combustivel">
+                    <option value="">Todos</option>
+                    <option value="Híbrido">Híbrido</option>
+                    <option value="Gasolina">Gasolina</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Eléctrico">Eléctrico</option>
+                </select>
+            </div>
+        </div>
+        <div class="button-container">
+            <input type="hidden" name="usuario" value="{{ usuario }}">
+            <button type="submit" class="button-pesquisar">Pesquisar</button>
+        </div>
+    </form>
+</div>
+
+
+<div>
+    {% if condicao %}
+    <p class="condicao"> Veículos não encontrados. <br>Tente novamente.</p>
+    {% endif %}
+    {% if condicao1 %}
+    <p class="condicao"> Veículos não disponíveis. <br>Tente novamente.</p>
+    {% endif %}
+
+    {% for row in dados_veiculos %}
+    <div class="card">
+        <div class="titulo">
+            {{ row[1] }} {{ row[2] }}
+        </div>
+        <div class="conteudo-imagem">
+            <img src="{{ row[14] }}" alt="imagem do veiculo" width="400" height="250">
+            <div class="conteudo">
+                <span>Capacidade de passageiros:</span> {{ row[12] }}
+                <span>Tipo de transmissão:</span> {{ row[5] }}
+                <span>Combustível:</span> {{ row[4] }}
+                <span>Potência:</span> {{ row[11] }}
+                <span>Cor:</span> {{ row[6] }}
+                <span>Ano:</span> {{ row[7] }}
+
+            </div>
+            <div class="preco">
+                <span>Preço por dia {{ row[8] }} €</span>
+
+                <br>
+                <form action="/selecionar-data" method="post">
+                    <input type="hidden" name="id do veiculo" value="{{ row[0] }}">
+                    <input type="hidden" name="marca do veiculo" value="{{ row[1] }}">
+                    <input type="hidden" name="modelo do veiculo" value="{{ row[2] }}">
+                    <input type="hidden" name="imagem do veiculo" value="{{ row[14] }}">
+                    <input type="hidden" name="preco" value="{{ row[8] }}">
+                    <input type="hidden" name="usuario" value="{{ usuario }}">
+                    <input type="hidden" name="plano" value="{{ plano }}">
+                    <button type="submit">Procurar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<footer>
+    <div class="footer">
+        <div class="footer-section">
+            <h4>Contato</h4>
+            <p>Email: info@luxurywheels.com</p>
+            <p>Telefone: 252 589217</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Endereço</h4>
+            <p>Rua 25 de Abril, 45</p>
+            <p>Matosinhos - Porto</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Redes Sociais</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2023-2024 Luxury Wheels. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+
+    <style>
+        .cabecalho {
+            text-align: center;
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+            height: 100px;
+        }
+
+        h1{
+            color: {{cor_h1}};
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 25vh;
+            padding-bottom: 20px;
+            background-image: linear-gradient(40deg, #d0d0d0, #c0c0c0);
+            border: 2px solid #333;
+            margin-top: 3px;
+        }
+
+        .titulo {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .imagem {
+            display: flex;
+
+        }
+
+        .container-data {
+            margin-left: 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #333;
+            text-align: center;
+            border-radius: 15px;
+            background-image: linear-gradient(40deg, #f0f0f0, #e0e0e0);
+        }
+
+        .card span {
+            font-size: 22px;
+            font-weight: bold;
+            display: block;
+        }
+
+        img {
+            margin-right: 20px;
+            border-radius: 15px;
+        }
+
+        .container-veiculo {
+            margin-left: 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #333;
+            text-align: center;
+            border-radius: 15px;
+            background-image: linear-gradient(40deg, #f0f0f0, #e0e0e0);
+        }
+
+        .conteiner-pagamento{
+            font-size: 22px;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card-pagamento {
+            margin-top: 1px;
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .cartao-credito, .paypal, .mbway {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(40deg, #f0f0f0, #e0e0e0);
+        }
+
+        .inputBox {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-top: 1px;
+            width: 25%;
+            padding: 10px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        input[type="radio"] {
+            width: 21px;
+            height: 21px;
+            margin-left: 150px;
+        }
+
+        .condicao{
+            font-size: 22px;
+            color: red;
+            margin-top: 16px;
+            padding: 10px;
+        }
+
+        .footer {
+            display: flex;
+            text-align: center;
+            margin-top: 1px;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .footer-section {
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .footer-section a {
+            color: #fff;
+        }
+
+    </style>
+
+</head>
+<body>
+<header class="cabecalho">
+    <h1>Luxury Wheels</h1>
+    <h2>Transformando Viagens em Aventuras Inesquecíveis</h2>
+</header>
+
+<div class="card">
+    <div class="titulo">
+        <span></span> {{ request.form['marca do veiculo'] }} {{ request.form['modelo do veiculo'] }}
+    </div>
+    <div class="imagem">
+        <img src="{{ request.form['imagem do veiculo'] }}" alt="imagem do veiculo" width="460" height="250">
+        <div class="container-veiculo">
+            <span>Detalhes do preço do veículo</span>
+            <br>
+            <span>Preço por dia: </span> {{ request.form['preco'] }}€
+            <span>Preço do plano: </span> {{ preco_do_plano }}€
+            <span>Preço do seguro:</span> {{ preco_do_seguro }}€
+            <br>
+            <span>Preço Total: </span> {{ preco_total }}€
+        </div>
+        <div class="container-data">
+            <br>
+            <br>
+            <br>
+            <br>
+            <span>Data de levantamento:</span> {{ request.form['data_input_levantamento'] }}
+            <span>Data de devolução:</span> {{ request.form['data_input_devolucao'] }}
+        </div>
+    </div>
+</div>
+<div class="conteiner-pagamento">
+    <span>Selecione a Forma de Pagamento</span>
+    <form action="/pagar" method="post">
+        <div class="card-pagamento">
+            <div class="cartao-credito">
+                <input type="radio" name="metodo_pagamento" value="cartao credito" required>
+                <div class="inputBox">
+                    <img src="https://infonegocios.info/content/images/2022/07/22/324342/conversions/premios_LA_tarjetasdecredito-medium-size.jpg"
+                         alt="imagem" width="100" height="50">
+                </div>
+                <div class="inputBox">
+                    <span> Nome do cartão:</span>
+                    <input type="text" name="nome_cartao" placeholder="sergio lopes">
+                </div>
+                <div class="inputBox">
+                    <span> Numero do cartão:</span>
+                    <input type="text" name="numero_cartao" placeholder="4709414161688655">
+                </div>
+                <div class="inputBox">
+                    <span> Validade:</span>
+                    <input type="text" name="validade_cartao" placeholder="12/24">
+                </div>
+                <div class="inputBox">
+                    <span> CVV:</span>
+                    <input type="text" name="cvv" placeholder="265">
+                </div>
+            </div>
+            <div class="paypal">
+                <input type="radio" name="metodo_pagamento" value="paypal" required>
+                <div class="inputBox">
+                    <img src="https://cms.rationalcdn.com/v3/assets/blteecf9626d9a38b03/blt16a09624faa9cd13/6144fadf68cc8a2cf88525df/paypal-big.png"
+                         alt="imagem" width="100" height="50">
+                </div>
+                <div class="inputBox">
+                    <span> Email:</span>
+                    <input type="text" name="email_paypal" placeholder="mail@hotmail.com">
+                </div>
+                <div class="inputBox">
+                    <span> password:</span>
+                    <input type="password" name="password_paypal" placeholder="xxxxxxxx">
+                </div>
+            </div>
+            <div class="mbway">
+                <input type="radio" name="metodo_pagamento" value="mbway" required>
+                <div class="inputBox">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/MB_WAY.jpg" alt="imagem" width="100"
+                         height="50">
+                </div>
+                <div class="inputBox">
+                    <span> Numero de Telemóvel:</span>
+                    <input type="text" name="num_telemovel" placeholder="914588795">
+                </div>
+            </div>
+        </div>
+        <div class="condicao">
+            {% if condicao %}
+            <span>Insira os dados de pagamento para a conclusão da reserva</span>
+            {% endif %}
+
+        </div>
+        <div>
+            <input type="hidden" name="imagem do veiculo" value="{{ request.form['imagem do veiculo'] }}">
+            <input type="hidden" name="id do veiculo" value="{{ request.form['id do veiculo'] }}">
+            <input type="hidden" name="marca do veiculo" value="{{ request.form['marca do veiculo'] }}">
+            <input type="hidden" name="modelo do veiculo" value="{{ request.form['modelo do veiculo'] }}">
+            <input type="hidden" name="data_input_levantamento" value="{{ request.form['data_input_levantamento'] }}">
+            <input type="hidden" name="data_input_devolucao" value="{{ request.form['data_input_devolucao'] }}">
+            <input type="hidden" name="preco_dia" value="{{ request.form['preco'] }}">
+            <input type="hidden" name="preco_do_plano" value="{{ preco_do_plano }}">
+            <input type="hidden" name="preco_seguro" value="{{ preco_do_seguro }}">
+            <input type="hidden" name="preco_total" value="{{ preco_total }}">
+            <input type="hidden" name="usuario" value="{{ usuario }}">
+            <input type="hidden" name="plano" value="{{ request.form['plano'] }}">
+            <input type="hidden" name="dias_aluguer" value="{{ dias_aluguer }}">
+            <button type="submit">Efectuar Pagamento</button>
+        </div>
+    </form>
+    <form action="/ver-frota" method="post">
+        <input type="hidden" name="usuario" value="{{ usuario }}">
+        <button type="submit">Cancelar Reserva</button>
+    </form>
+</div>
+
+</div>
+<footer>
+    <div class="footer">
+        <div class="footer-section">
+            <h3>Contato</h3>
+            <p>Email: info@luxurywheels.com</p>
+            <p>Telefone: 252 589217</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Endereço</h3>
+            <p>Rua 25 de Abril, 45</p>
+            <p>Matosinhos - Porto</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Redes Sociais</h3>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2023-2024 Luxury Wheels. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

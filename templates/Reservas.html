@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+
+    <style>
+        .cabecalho {
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .cabecalho-titulo{
+            text-align: center;
+        }
+
+        .navegador {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1em;
+            margin-top:-40px;
+        }
+
+        .nome-utulizador{
+            text-align: left;
+            font-size: 25px;
+            font-style: italic;
+            color: white;
+            font-weight: bold;
+            text-transform: capitalize;
+            padding: 10px;
+        }
+
+        .botao-navegador {
+            padding: 0.5em 1em;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            width: 120px;
+            height: 40px;
+            font-size: 15px;
+        }
+
+        .botao-navegador:hover {
+            background-color: rgb(0, 123, 255);
+            border-radius: 8px;
+            margin: 10 10px;
+        }
+
+        h1{
+            color: {{cor_h1}};
+        }
+
+        .titulo-reservas {
+            color: #555;
+            text-align: center;
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px 20px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: {{cor_card}};
+            border: 2px solid #333;
+        }
+
+        .titulo {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .conteudo-imagem {
+            display: flex;
+            align-items: center;
+        }
+
+        .conteudo {
+            margin-bottom: 50px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .conteudo span {
+            font-size: 22px;
+            font-weight: bold;
+            display: block;
+        }
+
+        img {
+            margin-bottom: 25px;
+            margin-right: 60px;
+            border-radius: 15px;
+        }
+
+        .div-button {
+            margin-left: 50px;
+            margin-bottom: 50px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .div-button button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+
+        }
+
+         .div-button button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        h4 {
+            font-size: 23px;
+            color: red;
+        }
+
+        .footer {
+            display: flex;
+            text-align: center;
+            margin-top: 1px;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .footer-section {
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .footer-section a {
+            color: #fff;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header class="cabecalho">
+    <h1 class="cabecalho-titulo">Luxury Wheels</h1>
+    <h2 class="cabecalho-titulo">Transformando Viagens em Aventuras Inesquecíveis</h2>
+    <div class="conteiner-navegador">
+        <span class="nome-utulizador">Utilizador: {{ dados_utilizador[0] }} {{ dados_utilizador[1] }} </span>
+        <div class="navegador">
+            <form action="/ver-frota" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <button type="submit" class="botao-navegador">Ver Frota</button>
+            </form>
+            <form action="/reservas" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Reservas</button>
+            </form>
+            <form action="/area-cliente" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Área Cliente</button>
+            </form>
+            <form action="/sobre" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Sobre</button>
+            </form>
+            <form action="/">
+                <button type="submit" class="botao-navegador">Log Out</button>
+            </form>
+        </div>
+    </div>
+</header>
+<h2 class="titulo-reservas">Reservas</h2>
+
+<div>
+    {% for row in dados_reservas_utilizador %}
+    <div class="card">
+        <div class="titulo">
+            {{ row[2] }} {{ row[3] }}
+        </div>
+        <div class="conteudo-imagem">
+            <img src="{{ row[13] }}" alt="imagem do veiculo" width="300" height="150">
+            <div class="conteudo">
+                <span>Data de Levantamento:</span> {{ row[4] }}
+                <span>Data de Devolução:</span> {{ row[5] }}
+                {% if condicao %}
+                <h4>Alterações ou cancelamentos  <br>só podem ser feitos antes da reserva.</h4>
+                {% endif %}
+            </div>
+            <div class="div-button">
+                <form action="/cancelar-reserva" method="post">
+                    <input type="hidden" name="usuario" value="{{ usuario }}">
+                    <input type="hidden" name="plano" value="{{ plano }}">
+                    <input type="hidden" name="data levantamento" value="{{ row[4] }}">
+                    <input type="hidden" name="data devolucao" value="{{ row[5] }}">
+                    <input type="hidden" name="id da reserva" value="{{ row[0] }}">
+                    <input type="hidden" name="id do veiculo" value="{{ row[12] }}">
+                    <button type="submit" class="submit-btn">Cancelar Reserva</button>
+                </form>
+                <br>
+                <form action="/alterar-reserva" method="post">
+                    <input type="hidden" name="id da reserva" value="{{ row[0] }}">
+                    <input type="hidden" name="id do veiculo" value="{{ row[12] }}">
+                    <input type="hidden" name="marca do veiculo" value="{{ row[2] }}">
+                    <input type="hidden" name="modelo do veiculo" value="{{ row[3] }}">
+                    <input type="hidden" name="imagem do veiculo" value="{{ row[13] }}">
+                    <input type="hidden" name="data levantamento" value="{{ row[4] }}">
+                    <input type="hidden" name="data devolucao" value="{{ row[5] }}">
+                    <input type="hidden" name="preco" value="{{ row[6] }}">
+                    <input type="hidden" name="usuario" value="{{ usuario }}">
+                    <button type="submit" class="submit-btn">Alterar Data</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<footer>
+    <div class="footer">
+        <div class="footer-section">
+            <h3>Contato</h3>
+            <p>Email: info@luxurywheels.com</p>
+            <p>Telefone: 252 589217</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Endereço</h3>
+            <p>Rua 25 de Abril, 45</p>
+            <p>Matosinhos - Porto</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Redes Sociais</h3>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2023-2024 Luxury Wheels. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

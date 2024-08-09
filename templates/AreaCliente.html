@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Cliente</title>
+
+    <style>
+        .cabecalho {
+            text-align: center;
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .navegador {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1em;
+            margin-top:-40px;
+        }
+
+        .botao-navegador {
+            padding: 0.5em 1em;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            width: 120px;
+            height: 40px;
+            font-size: 15px;
+        }
+
+        .botao-navegador:hover {
+            background-color: rgb(0, 123, 255);
+            border-radius: 8px;
+            margin: 10 10px;
+        }
+
+        .conteiner-navegador span{
+            font-size: 25px;
+            font-style: italic;
+            color: white;
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-right: 950px;
+        }
+
+        h1{
+            color: {{cor_h1}};
+        }
+
+        .dados-cliente {
+            display: flex;
+            margin-top: 5px;
+            background: #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .dados-cliente-section{
+            padding: 20px;
+            margin-right: 120px;
+            text-transform: capitalize;
+        }
+
+        .dados-cliente-section span{
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 4px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .footer {
+            display: flex;
+            text-align: center;
+            margin-top: 1px;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .footer-section {
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .footer-section a {
+            color: #fff;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header class="cabecalho">
+    <h1>Luxury Wheels</h1>
+    <h2>Transformando Viagens em Aventuras Inesquecíveis</h2>
+    <div class="conteiner-navegador">
+        <span></span>
+        <div class="navegador">
+            <form action="/ver-frota" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <button type="submit" class="botao-navegador">Ver Frota</button>
+            </form>
+            <form action="/reservas" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Reservas</button>
+            </form>
+            <form action="/area-cliente" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Área Cliente</button>
+            </form>
+            <form action="/sobre" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Sobre</button>
+            </form>
+            <form action="/">
+                <button type="submit" class="botao-navegador">Log Out</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<div class="dados-cliente">
+    <span style="font-size: 20px;"> <strong>Dados do Cliente:</strong> </span>
+
+    <div class="dados-cliente-section">
+        <span><strong>Nome:</strong></span>{{ dados_utilizador[0] }} <br>
+        <span><strong>Apelido:</strong></span> {{ dados_utilizador[1] }} <br>
+        <span><strong>Plano:</strong></span> {{ dados_utilizador[4] }}
+    </div>
+    <div class="dados-cliente-section">
+        <span><strong>Gênero:</strong></span> {{ dados_utilizador[3] }} <br>
+        <span><strong>Cidadania :</strong>{{ dados_utilizador[5] }}</span> <br>
+        <span><strong>Idade:</strong></span> {{ dados_utilizador[2] }}
+    </div>
+    <div class="dados-cliente-section">
+        <span><strong>Total de compras:</strong></span> {{ preco_total }} €<br>
+        <span><strong>Total veiculos alugados:</strong></span> {{ quantidade_veiculos_alugados }} <br>
+        <span><strong>Total dias alugados:</strong></span> {{ dias_aluguer }}
+    </div>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Marca do Veículo</th>
+        <th>Data de Levantamento</th>
+        <th>Data de Devolução</th>
+        <th>Dias de Aluguer</th>
+        <th>Preço por Dia</th>
+        <th>Preço do Seguro</th>
+        <th>Preço do Plano</th>
+        <th>Preço Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in dados_reservas %}
+    <tr>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[4] }}</td>
+        <td>{{ row[5] }}</td>
+        <td>{{ row[10] }}</td>
+        <td>{{ row[6] }} €</td>
+        <td>{{ row[7] }} €</td>
+        <td>{{ row[8] }} €</td>
+        <td>{{ row[9] }} €</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<footer>
+    <div class="footer">
+        <div class="footer-section">
+            <h3>Contato</h3>
+            <p>Email: info@luxurywheels.com</p>
+            <p>Telefone: 252 589217</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Endereço</h3>
+            <p>Rua 25 de Abril, 45</p>
+            <p>Matosinhos - Porto</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Redes Sociais</h3>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2023-2024 Luxury Wheels. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

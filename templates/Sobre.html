@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre</title>
+
+    <style>
+        .cabecalho {
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .cabecalho-titulo{
+            text-align: center;
+        }
+
+        .navegador {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1em;
+            margin-top:-40px;
+        }
+
+        .nome-utulizador{
+            text-align: left;
+            font-size: 25px;
+            font-style: italic;
+            color: white;
+            font-weight: bold;
+            text-transform: capitalize;
+            padding: 10px;
+        }
+
+        .botao-navegador {
+            padding: 0.5em 1em;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            width: 120px;
+            height: 40px;
+            font-size: 15px;
+        }
+
+        .botao-navegador:hover {
+            background-color: rgb(0, 123, 255);
+            border-radius: 8px;
+            margin: 10 10px;
+        }
+
+        h1{
+            color: {{cor_h1}};
+        }
+
+        .conteudo {
+            font-size: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+
+        .container-conteudo {
+            flex: 1 0 45%;
+            padding: 10px;
+            background-color: #f2f2f2;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+
+        .footer {
+            display: flex;
+            text-align: center;
+            margin-top: 1px;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .footer-section {
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .footer-section a {
+            color: #fff;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+<header class="cabecalho">
+    <h1 class="cabecalho-titulo">Luxury Wheels</h1>
+    <h2 class="cabecalho-titulo">Transformando Viagens em Aventuras Inesquecíveis</h2>
+    <div class="conteiner-navegador">
+        <span class="nome-utulizador">Utilizador: {{ dados_utilizador[0] }} {{ dados_utilizador[1] }} </span>
+        <div class="navegador">
+            <form action="/ver-frota" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <button type="submit" class="botao-navegador">Ver Frota</button>
+            </form>
+            <form action="/reservas" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Reservas</button>
+            </form>
+            <form action="/area-cliente" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Área Cliente</button>
+            </form>
+            <form action="/sobre" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="hidden" name="plano" value="{{ plano }}">
+                <button type="submit" class="botao-navegador">Sobre</button>
+            </form>
+            <form action="/">
+                <button type="submit" class="botao-navegador">Log Out</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<div class="conteudo">
+    <p style="text-align: center;">
+        Fundada em 2023 no Porto, a Luxury Wheels redefine o aluguel de automóveis com sua frota de luxo. Presente em
+        vários
+        países europeus, oferecemos não apenas carros, mas um estilo de vida de alto padrão. Nossas parcerias sólidas
+        com
+        empresas do setor garantem uma experiência de aluguel excepcional, marcada pela elegância e liberdade.</p>
+    <div class="container-conteudo">
+        <p><strong>Nossa Localização:</strong> <br>
+            Situados em Matosinhos, garantimos fácil acesso, tornando suas viagens simples e descomplicadas. Seja a
+            trabalho ou lazer,
+            a Luxury Wheels atende a todas as suas necessidades de mobilidade.</p>
+    </div>
+    <div class="container-conteudo">
+        <p><strong>Frota de Luxo:</strong> <br>
+            Acreditamos que cada jornada deve ser única. Nossa frota impressionante, composta por sedans elegantes, SUVs
+            espaçosos e carros esportivos de alta performance,
+            assegura que você viaje com estilo, independentemente da ocasião.</p>
+    </div>
+    <div class="container-conteudo">
+        <p><strong>Atendimento Personalizado:</strong> <br>
+            Dedicamo-nos a proporcionar atendimento personalizado de alta qualidade, desde a reserva até a devolução do
+            veículo. Cada interação é marcada pela atenção aos detalhes,
+            orientação especializada e assistência rápida.</p>
+    </div>
+    <div class="container-conteudo">
+        <p><strong>Compromisso Ambiental:</strong> <br>
+            Investimos em veículos eficientes e adotamos práticas sustentáveis, contribuindo para um futuro mais verde e
+            responsável.</p>
+    </div>
+    <p> Ao escolher a Luxury Wheels, você inicia uma jornada de luxo, conveniência e confiabilidade. Aguardamos sua
+        visita em nossa localização na Rua 25 de Abril, Matosinhos,
+        para transformar sua viagem em uma experiência extraordinária.</p>
+</div>
+
+<footer>
+    <div class="footer">
+        <div class="footer-section">
+            <h3>Contato</h3>
+            <p>Email: info@luxurywheels.com</p>
+            <p>Telefone: 252 589217</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Endereço</h3>
+            <p>Rua 25 de Abril, 45</p>
+            <p>Matosinhos - Porto</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Redes Sociais</h3>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2023-2024 Luxury Wheels. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

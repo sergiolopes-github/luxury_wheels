@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <style>
+        *{
+            margin:0; padding: 0;
+            box-sizing: border-box;
+            outline: none; border: none;
+            transition: all .2s linear;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            min-height: 100vh;
+            padding-bottom: 70px;
+            background-image: linear-gradient(40deg, white, #ccc);
+            padding-botton: 70px;
+        }
+
+        .container form {
+            padding: 20px;
+            width: 700px;
+            background: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            border-radius: 10px;
+        }
+
+        .container form .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .container form .row .col {
+            flex: 1 1 250px;
+        }
+
+        .container form .row .col .title{
+            font-size: 25px;
+            color: #333;
+            padding-bottom: 5px;
+            dispaly: center;
+            text-transform: capitalize;
+        }
+
+        .container form .row .col .inputBox{
+            margin: 15px 0;
+        }
+
+        .container form .row .col .span{
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .container form .row .col .inputBox input{
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            font-size: 15px;
+            text-transform: none;
+        }
+
+        .container form .row .col .inputBox input:focus{
+            border:1px solid #000;
+        }
+
+        .container form .submit-btn{
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            background: #27ae60;
+            color: #fff;
+            margin-top: 5px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .container form .submit-btn:hover{
+            background: #4caf50;
+        }
+
+        .container form .row .col .inputBox label {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        h2 {
+            font-size: 17px;
+            color: red;
+            margin-top: 16px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <form action="/registar-cliente" method="post">
+        <div class="row">
+            <div class="col">
+                <h1 class="title">Criar Conta</h1>
+                <div class="inputBox">
+                    <span>Nome :</span>
+                    <input type="text" name="nome" placeholder="nome" required>
+                </div>
+                <div class="inputBox">
+                    <span>Usuário :</span>
+                    <input type="text" name="usuario" placeholder="usuário">
+                </div>
+                <div class="inputBox">
+                    <span>Senha :</span>
+                    <input type="password" name="senha" placeholder="password" required>
+                </div>
+
+                <div class="inputBox">
+                    <span>Cidadania :</span>
+                    <input type="text" name="cidadania" placeholder="cidadania" required>
+                </div>
+            </div>
+
+            <div class="col">
+                <h1 class="title">luxury wheels</h1>
+                <div class="inputBox">
+                    <span>Apelido :</span>
+                    <input type="text" name="apelido" placeholder="apelido" required>
+                </div>
+                <div class="inputBox">
+                    <span>Idade :</span>
+                    <input type="text" name="idade" placeholder="idade" required>
+                </div>
+                <div class="inputBox">
+                    <span>Confirmar Senha :</span>
+                    <input type="password" name="confirmar_senha" placeholder="confirmar senha" required>
+                </div>
+                <div class="inputBox">
+                    <label for="plano">Plano :</label>
+                    <select id="plano" name="plano">
+                        <option value="">Selecione uma opção</option>
+                        <option value="gold">Gold</option>
+                        <option value="silver">Silver</option>
+                        <option value="economico">Economico</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <label for="genero">Gênero :</label>
+                    <select id="genero" name="genero" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Enviar" class="submit-btn">
+        {% if condicao %}
+        <h2>As senhas não coincidem. Tente novamente.</h2>
+        {% endif %}
+
+        {% if condicao1 %}
+        <h2>Usuário já existente. Tente novamente.</h2>
+        {% endif %}
+    </form>
+</div>
+</body>
+</html>

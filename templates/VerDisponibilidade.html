@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver disponibilidade</title>
+
+    <style>
+    .cabecalho {
+        text-align: center;
+        background: #333;
+        color: #fff;
+        border-radius: 8px;
+        height: 90px;
+    }
+
+    h1 {
+        color: {{cor_h1}};
+    }
+
+    h3 {
+        font-size: 17px;
+        color: red;
+        margin-top: 16px;
+        }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-top: 3px;
+        background-image: linear-gradient(40deg, #d0d0d0, #c0c0c0);
+        border: 2px solid #333;
+    }
+
+    .titulo {
+        font-size: 35px;
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+    .imagem {
+        display: flex;
+        margin-right: 20px;
+        border-radius: 15px;
+    }
+
+    img {
+        margin-right: 20px;
+        border-radius: 15px;
+    }
+
+    .dados {
+        margin-left: 50px;
+        margin-bottom: 50px;
+        padding: 40px;
+        border: 1px solid #333;
+        text-align: center;
+        border-radius: 15px;
+        background-image: linear-gradient(40deg, #f0f0f0, #e0e0e0);
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    button {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+        background: #333;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    .footer {
+        display: flex;
+        text-align: center;
+        margin-top: 1px;
+        background: #333;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+    .footer-section {
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+    .footer-section a {
+        color: #fff;
+    }
+
+    input {
+        margin-top: 5px;
+    }
+
+    </style>
+
+</head>
+<body>
+<header class="cabecalho">
+    <h1>Luxury Wheels</h1>
+    <h2>Transformando Viagens em Aventuras Inesquecíveis</h2>
+</header>
+
+
+<div class="card">
+    <div class="titulo">
+        <span></span> {{ request.form['marca do carro'] }}
+    </div>
+    <div class="imagem">
+        <img src="{{ request.form['imagem do veiculo'] }}" alt="imagem do veiculo" width="400" height="250">
+        <div class="conteudo">
+        </div>
+        <div class="dados">
+            <form action="/ver-disponibilidade" method="post">
+                <label for="data_input_levantamento">Selecione a data de levantamento</label>
+                <br>
+                <input type="date" id="data_input_levantamento" name="data_input_levantamento" required>
+                <br>
+                <label for="data_input_devolucao">Selecione a data de devolução</label>
+                <br>
+                <input type="date" id="data_input_devolucao" name="data_input_devolucao" required>
+
+                <input type="hidden" name="id do veiculo" value="{{ request.form['id do veiculo'] }}">
+                <input type="hidden" name="marca do veiculo" value="{{ request.form['marca do veiculo'] }}">
+                <input type="hidden" name="modelo do veiculo" value="{{ request.form['modelo do veiculo'] }}">
+                <input type="hidden" name="imagem do veiculo" value="{{ request.form['imagem do veiculo'] }}">
+                <input type="hidden" name="preco" value="{{ request.form['preco'] }}">
+                <input type="hidden" name="plano" value="{{ request.form['plano'] }}">
+                <input type="hidden" name="preco_total" value="{{ preco_total }}">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <button type="submit" class="submit-btn">Ver disponibilidade</button>
+                {% if condicao %}
+                <h3>Veículo não disponível <br> Tente outra data</h3>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<footer>
+    <div class="footer">
+        <div class="footer-section">
+            <h4>Contato</h4>
+            <p>Email: info@luxurywheels.com</p>
+            <p>Telefone: 252 589217</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Endereço</h4>
+            <p>Rua 25 de Abril, 45</p>
+            <p>Matosinhos - Porto</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Redes Sociais</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2023-2024 Luxury Wheels. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

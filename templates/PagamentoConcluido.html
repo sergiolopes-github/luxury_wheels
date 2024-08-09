@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transação Concluída com Êxito</title>
+
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .container p {
+        font-size: 2.5rem;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 1rem 2rem;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 5px;
+    }
+
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>"Agradecemos por escolher nossos serviços! <br> Seu pagamento foi recebido com êxito."</p>
+    <form action="/ver-frota" method="post">
+        <input type="hidden" name="usuario" value="{{ usuario }}">
+        <button type="submit">Voltar à Página Inicial</button>
+    </form>
+</div>
+</body>
+</html>
